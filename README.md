@@ -1,5 +1,8 @@
 # AI-School-Competition-2
 
+https://dacon.io/competitions/official/235810/overview/description  
+  
+
 AI competition2  : lgbm 모델 사용, 많은 양의 데이터를 반복 학습시켜 public상에서 점수를 높게 받을 수 있게 설정  
 AI Competition Ver2 : lgbm 모델 사용, 학습시킬 컬럼을 늘리는데 주력 fold 교차검증 방식을 이용하여 과적합 방지  
 
