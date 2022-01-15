@@ -130,7 +130,78 @@ plot_feature_importances(rfr_fold_fit, train_data[input_var_0])
 ## English
 
 
-VotingRegressor, StackingRegressor was implemented and validated. AI competition.ipynb)
+# Prediction-of-the-number-of-people-getting-on-and-off-the-bus-at-work-hours-in-Jeju-Island
+
+### Participation in intramural competitions
+ * An intra-school AI contest was held under the theme of predicting the number of bus passengers at work hours on Jeju Island, which was held in Dacon before.
+
+
+### Dacon Prediction-of-the-number-of-people-getting-on-and-off-the-bus-at-work-hours-in-Jeju-Island
+* [Dacon Prediction-of-the-number-of-people-getting-on-and-off-the-bus-at-work-hours-in-Jeju-Island link](https://dacon.io/competitions/official/229255/overview/description)  
+
+
+
+### Data Description
+* In the data, all boarding information is recorded as the bus stop entry and exit data for the case of payment through the bus card, but when getting off the bus, if the bus card is not stamped, the record is empty. Therefore, we would like to inform you in advance that the number of passengers on board and the number of people getting off are not the same and there is a slight difference.
+* In the case of intramural competition, data with missing data from existing competitions was given. 
+
+
+### Provided file
+1. train.csv – For each date in Jeju Island in September 2019, the number of passengers getting on and off at each bus stop during the check-in time (6:00 - 12:00) and the number of passengers at each bus stop during the departure time(18:00 - 20:00) are recorded.
+2. test.csv – The number of people getting on and off each bus stop for each date in October 2019 and the departure time (6:00 - 12:00) is recorded.
+3. bus.csv - Boarding and disembarking informatins is recorded for each bus card. This data is only available for boarding time between 6:00 - 12:00.
+
+### Github file description
+1. AI competition2 : Using the lgbm model, iteratively learns a large amount of data so that it can receive a high score in the public
+2. AI Competition Ver2 : Using the lgbm model, prevents overfitting by using the fold cross-validation method and increase the number of columns to be trained
+3. AI competition : k-fold model construction (Generated to determine learning results)
+4. GitHub Competition : Among public data portal data, new data is created using the openAPI for daily expected passengers.
+5. Position : Create latitude and longitude corresponding to train and test stop names using 제주특별자치도_버스정류소현황_20170831 file among public data portal data, if only the file is used, a NULL stop is created, so the latitude and longitude of the null stop are generated using the Jeju Data Hub(https://www.jejudatahub.net/) API
+
+
+### Target
+
+* Aimed at creating several derived variables.
+* Aimed at recovering data from existing competitions.
+
+
+
+### Process
+
+* Since it was a contest that had already been held, the code was shared, so analyzed the code.
+* The code was improved in a way that the data in the existing competition can be recovered.
+* Even if public results are good, there is no guarantee that private will produce the same good results, so one of the two file submissions did not consider overfitting and the other submitted one that considred overfitting.
+* It was a pity that Cross Validation could not be applied in the las competition, so tried to apply it somehow.
+
+1. [Share existing contest code](https://dacon.io/competitions/official/229255/codeshare)
+    
+
+2. Data recovery
+    2-1. [Public data portal](https://www.data.go.kr/data/15010850/fileData.do)의 데이터 중 Generate latitude and longitude corresponding to train and test stop names using files(제주특별자치도_버스정류소현황_20170831). Additional data was needed because a NULL stop would be created if only the corresponding data was used.
+    2-2. Information on data corresponding to NULL was obtained using the API of [Jeju Data Hub](https://www.jejudatahub.net/data/view/data/612)
+    2-3. Among the data of [the public data portal](https://www.data.go.kr/data/15004024/openapi.do), new data was created using the airport daily forecasted passenger openAPI, and several derived variables were created.
+    (Latitud, longitude data recovery : Position.ipynb, Airport daily forecasted passenger data : GitHub Competition.ipynb)
+
+3. reference site
+    3-1. [Learning model selection and Cross Validation](https://hyemin-kim.github.io/2020/08/04/S-Python-sklearn4/#1-randomizedsearchcv)
+
+
+
+
+
+### Results
+
+* Although it was possible to recover some data related to latitude and longitude, it was impossible to distingush between bus stops with the same name. (If the bus stop with the same name but the route is different)
+
+* It there is a major tourist destination, the model was trained by calculating how many people visited the tourist attracion and the distance between the historc site and the bus stop, but the accuracy was not imporved. (It does not seem to be related as it is a prediction of the number of bus passengers at work hours.)
+
+* Derived variables made with airport daily expected passenger data had a significand effect on accuray improvement.
+
+
+
+### Supplement
+
+* There were many difficulties in writing the k-fold cross-validation code. (Below is the implemented k-fold code RandomForestRegressor other than this model LGBMRegressor, GradientBoostingRegressor, XGBRegressor, VotingRegressor, StackingRegressor was implemented and validated. AI competition.ipynb)
 ``` python
 # Random Forest K-fold
 from sklearn.ensemble import RandomForestRegressor
@@ -182,6 +253,16 @@ plot_feature_importances(rfr_fold_fit, train_data[input_var_0])
 * Due to the large amount of data, it tkaes a considerable amount of time to perform each iteration, so it is not possible ot check various cases.
 
 * After naming the notebook file roughly, I was confused about whic file it was later. I felt the need to name the files so that the functions of each file could be identified at once.
+
+
+
+
+
+
+
+
+
+
 
 
 
