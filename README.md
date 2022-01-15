@@ -119,7 +119,7 @@ plot_feature_importances(rfr_fold_fit, train_data[input_var_0])
 [19900]	training's rmse: 0.517365
 [20000]	training's rmse: 0.515717
 
-* 데이터가 커 한복 반복 수행할 때 마다 상당한 시간이 걸려 다양한 경우에 대해서 확인하지 못했다.
+* 데이터가 커 한 반복 수행할 때 마다 상당한 시간이 걸려 다양한 경우에 대해서 확인하지 못했다.
 
 * 노트북 파일 명을 대충 지으니 나중에 어떤 파일인지 헷갈리는 사태가 발생했다. 각 파일 별로 기능을 한 번에 파악할 수 있도록 파일 명을 정해야 될 필요성을 느꼈다.
 
@@ -130,6 +130,58 @@ plot_feature_importances(rfr_fold_fit, train_data[input_var_0])
 ## English
 
 
+VotingRegressor, StackingRegressor was implemented and validated. AI competition.ipynb)
+``` python
+# Random Forest K-fold
+from sklearn.ensemble import RandomForestRegressor
+
+n_splits = 5
+kfold = KFold(n_splits=n_splits, random_state=1, shuffle=True)
+
+i = 1
+total_error = 0
+
+X = np.array(train_data[input_var_0])
+Y = np.array(y_train.values.ravel())
+
+rfr_fold = RandomForestRegressor(n_estimators=200, n_jobs=-1, random_state=1)
+
+for train_index, test_index in kfold.split(X):
+    x_train_fold, x_test_fold = X[train_index], X[test_index]
+    y_train_fold, y_test_fold = Y[train_index], Y[test_index]
+    rfr_fold_fit = rfr_fold.fit(x_train_fold, y_train_fold)
+    rfr_fold_pred = rfr_fold_fit.predict(x_test_fold)
+    error = np.sqrt(mean_squared_error(y_test_fold, rfr_fold_pred))
+    print('Fold = {}, prediction score = {:.2f}'.format(i, error))
+    total_error += error
+    i+=1
+
+print('---'*10)
+print('Average Error: %s' % (total_error / n_splits))
+
+# n_estimator : 200 => 30분 Average Error : 2.165 input_var_0
+
+plot_feature_importances(rfr_fold_fit, train_data[input_var_0])
+```
+* As created various models, it took a lot of time to adjust the hyperparameters. In the end, using LGBMRegressor alone and giving a sufficiently large number of repetitions had the highest accuracy.
+
+* When the LGBMRegressor was created and repeated 50000 times, the kernel died. (repeat 20000 times)
+
+
+* In the case of repeated execution, the rmse continued to decrease. I think it is correct to decrease to some extent when repeating the epoch, but it decreases even if is repeated until the kernel connection is disconnected. I fel the need to study further.
+...
+[2100]	training's rmse: 1.31259
+[2200]	training's rmse: 1.2926
+[2300]	training's rmse: 1.27387
+...
+[19700]	training's rmse: 0.520722
+[19800]	training's rmse: 0.51907
+[19900]	training's rmse: 0.517365
+[20000]	training's rmse: 0.515717
+
+* Due to the large amount of data, it tkaes a considerable amount of time to perform each iteration, so it is not possible ot check various cases.
+
+* After naming the notebook file roughly, I was confused about whic file it was later. I felt the need to name the files so that the functions of each file could be identified at once.
 
 
 
