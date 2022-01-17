@@ -110,14 +110,14 @@ plot_feature_importances(rfr_fold_fit, train_data[input_var_0])
 
 * 반복 수행시킬 경우 rmse가 계속적으로 감소했다. epoch를 반복시킬 경우 어느정도 감소하는 것은 맞다고 생각하지만 커널 연결이 끊어질 때 까지 반복시킨 경우에도 감소했다. 이 부분에 대해서는 추가적으로 공부해야 할 필요성을 느꼈다.
 ...
-[2100]	training's rmse: 1.31259
-[2200]	training's rmse: 1.2926
-[2300]	training's rmse: 1.27387
-...
-[19700]	training's rmse: 0.520722
-[19800]	training's rmse: 0.51907
-[19900]	training's rmse: 0.517365
-[20000]	training's rmse: 0.515717
+[2100]	training's rmse: 1.31259  
+[2200]	training's rmse: 1.2926  
+[2300]	training's rmse: 1.27387  
+...  
+[19700]	training's rmse: 0.520722  
+[19800]	training's rmse: 0.51907  
+[19900]	training's rmse: 0.517365  
+[20000]	training's rmse: 0.515717  
 
 * 데이터가 커 한 반복 수행할 때 마다 상당한 시간이 걸려 다양한 경우에 대해서 확인하지 못했다.
 
