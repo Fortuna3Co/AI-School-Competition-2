@@ -240,15 +240,15 @@ plot_feature_importances(rfr_fold_fit, train_data[input_var_0])
 
 
 * In the case of repeated execution, the rmse continued to decrease. I think it is correct to decrease to some extent when repeating the epoch, but it decreases even if is repeated until the kernel connection is disconnected. I fel the need to study further.
-...
-[2100]	training's rmse: 1.31259
-[2200]	training's rmse: 1.2926
-[2300]	training's rmse: 1.27387
-...
-[19700]	training's rmse: 0.520722
-[19800]	training's rmse: 0.51907
-[19900]	training's rmse: 0.517365
-[20000]	training's rmse: 0.515717
+...  
+[2100]	training's rmse: 1.31259  
+[2200]	training's rmse: 1.2926  
+[2300]	training's rmse: 1.27387  
+...  
+[19700]	training's rmse: 0.520722  
+[19800]	training's rmse: 0.51907  
+[19900]	training's rmse: 0.517365  
+[20000]	training's rmse: 0.515717  
 
 * Due to the large amount of data, it tkaes a considerable amount of time to perform each iteration, so it is not possible ot check various cases.
 
