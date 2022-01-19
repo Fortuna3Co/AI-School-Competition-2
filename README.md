@@ -250,7 +250,7 @@ plot_feature_importances(rfr_fold_fit, train_data[input_var_0])
 [19900]	training's rmse: 0.517365  
 [20000]	training's rmse: 0.515717  
 
-* Due to the large amount of data, it tkaes a considerable amount of time to perform each iteration, so it is not possible ot check various cases.
+* Due to the large amount of data, it takes a considerable amount of time to perform each iteration, so it is not possible to check various cases.
 
 * After naming the notebook file roughly, I was confused about whic file it was later. I felt the need to name the files so that the functions of each file could be identified at once.
 
